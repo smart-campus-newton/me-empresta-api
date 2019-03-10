@@ -4,14 +4,15 @@
   "description": "O aplicativo Me Empresta tem o intuito de disponibilizar uma plataforma para compartilhamentos de objetos que possibilitem empréstimos entre os alunos do Centro Universitário Newton",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.16.4",
     "body-parser": "^1.18.3",
-    "mysql": "^2.16.0"
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.10"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",

@@ -1,12 +1,19 @@
 const connection = require('../config/db').connection;
+const response = require('./response_query').response;
 
-function execSQLQuery(sqlQry, res) {
+function execSQLQuery(sqlQry, res, status) {
     connection.query(sqlQry, function (error, results, fields) {
-        if (error)
-            res.send(error);
-        else
-            res.send(results);
-        console.log('executou!');
+        let result = {};
+        if (error) {
+            result.success = false;
+            result.data = error;
+        }
+        else {
+            result.success = true;
+            result.data = results;
+        }
+
+        response(status, result, res);
     });
 }
 

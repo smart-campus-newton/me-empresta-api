@@ -7,41 +7,25 @@ module.exports = function (app) {
     });
     app.get('/v1/public/objects/:objectId', (req, res) => {
         const id = req.params.objectId;
-        res.send({ 'error': 'An error has occurred' });
-    });
-    app.get('/v1/public/objects/:objectId/scores', (req, res) => {
-        const id = req.params.objectId;
-        res.send({ 'error': 'An error has occurred' });
+        querys.getById(id, res);
     });
 
     //----------PUT----------------------------//
     app.put('/v1/public/objects/:objectId', (req, res) => {
         const id = req.params.objectId;
-        const object = req.body.object;
-        res.send({ 'error': 'An error has occurred' });
-    });
-    app.put('/v1/public/objects/:objectId/scores/:scoreId', (req, res) => {
-        const objectId = req.params.objectId;
-        const scoreId = req.params.scoreId;
-        const scoreEdited = req.params.scores;
-
-        res.send({ 'error': 'An error has occurred' });
+        const object = req.body;
+        querys.edit(id, object, res);
     });
 
     //----------POST---------------------------//
     app.post('/v1/public/objects', (req, res) => {
-        const newobject = req.body.object;
-        res.send({ 'error': 'An error has occurred' });
+        const newobject = req.body;
+        querys.create(newobject, res);
     });
-    app.post('/v1/public/objects/:objectId/scores', (req, res) => {
-        const scoreId = req.params.scoreId;
-        const newScore = req.body.score;
-        res.send({ 'error': 'An error has occurred' });
-    });
-    
+
     //----------DELETE-------------------------//
     app.delete('/v1/public/objects/:objectId', (req, res) => {
         const id = req.params.objectId;
-        res.send({ 'error': 'An error has occurred' });
+        querys.deleteById(id, res);
     });
 };

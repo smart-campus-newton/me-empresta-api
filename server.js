@@ -9,6 +9,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 connection.connect(function (err) {
     if (err) return console.log(err);
