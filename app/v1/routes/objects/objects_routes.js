@@ -1,7 +1,9 @@
-module.exports = function (app, db) {
+const querys = require('./objects_query');
+
+module.exports = function (app) {
     //----------GET----------------------------//
     app.get('/v1/public/objects', (req, res) => {
-        res.send({ 'error': 'An error has occurred' });
+        querys.getAll(res);
     });
     app.get('/v1/public/objects/:objectId', (req, res) => {
         const id = req.params.objectId;

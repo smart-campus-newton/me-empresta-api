@@ -1,0 +1,26 @@
+{
+  "name": "me-empresta-api",
+  "version": "1.0.0",
+  "description": "O aplicativo Me Empresta tem o intuito de disponibilizar uma plataforma para compartilhamentos de objetos que possibilitem empréstimos entre os alunos do Centro Universitário Newton",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "body-parser": "^1.18.3",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smart-campus-newton/me-empresta-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smart-campus-newton/me-empresta-api/issues"
+  },
+  "homepage": "https://github.com/smart-campus-newton/me-empresta-api#readme"
+}
