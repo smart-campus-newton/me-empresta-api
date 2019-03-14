@@ -6,6 +6,11 @@ const connection = require('./app/config/db').connection;
 const initialTables = require('./app/config/initialTables').initialTables;
 const app = express();
 
+//swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json'); 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 const port = process.env.PORT || 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));

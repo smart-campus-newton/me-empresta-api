@@ -1,0 +1,210 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API documentation for Me Empresta"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "host": "me-empresta.herokuapp.com",
+    "basePath": "/v1/public",
+    "paths": {
+        "/objects": {
+            "get": {
+                "x-swagger-router-controller": "Objects",
+                "tags": [
+                    "/objects"
+                ],
+                "summary": "Return all objects",
+                "description": "Return all objects",
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "schema": {
+                            "$ref": "#/definitions/Objects"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error."
+                    }
+                }
+            },
+            "post": {
+                "x-swagger-router-controller": "Objects",
+                "tags": [
+                    "/objects"
+                ],
+                "summary": "Create an object",
+                "description": "Create an object",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Object to update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Objects"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": " Successful creation occurred.",
+                        "schema": {
+                            "$ref": "#/definitions/Objects"
+                        }
+                    },
+                    "404": {
+                        "description": "Object not found."
+                    },
+                    "500": {
+                        "description": "Internal Server Error.",
+                        "schema": {
+                            "$ref": "#/definitions/MySqlError"
+                        }
+                    }
+                }
+            }
+        },
+        "/objects/{objectId}": {
+            "get": {
+                "x-swagger-router-controller": "Objects",
+                "tags": [
+                    "/objects"
+                ],
+                "summary": "Find an object by ID",
+                "description": "Find an object by ID",
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "description": "ID of object to return",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request.",
+                        "schema": {
+                            "$ref": "#/definitions/Objects"
+                        }
+                    },
+                    "404": {
+                        "description": "Object not found."
+                    },
+                    "500": {
+                        "description": "Internal Server Error.",
+                        "schema": {
+                            "$ref": "#/definitions/MySqlError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "x-swagger-router-controller": "Objects",
+                "tags": [
+                    "/objects"
+                ],
+                "description": "Update an object",
+                "summary": "Update an object",
+                "parameters": [
+                    {
+                        "name": "objectId",
+                        "in": "path",
+                        "description": "ID of object that needs to be updated",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Object to update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Objects"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted request.",
+                        "schema": {
+                            "$ref": "#/definitions/Objects"
+                        }
+                    },
+                    "404": {
+                        "description": "Object not found."
+                    },
+                    "500": {
+                        "description": "Internal Server Error.",
+                        "schema": {
+                            "$ref": "#/definitions/MySqlError"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "x-swagger-router-controller": "Objects",
+                "tags": [
+                    "/objects"
+                ],
+                "summary": "Deletes an object",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "objectId",
+                        "in": "path",
+                        "description": "Object id to delete",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted request."
+                    },
+                    "404": {
+                        "description": "Object not found."
+                    },
+                    "500": {
+                        "description": "Internal Server Error.",
+                        "schema": {
+                            "$ref": "#/definitions/MySqlError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Objects": {
+            "properties": {
+                "ID": {
+                    "type": "integer"
+                },
+                "NAME": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "MySqlError": {
+            "properties": {
+                "data": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        }
+    }
+}
