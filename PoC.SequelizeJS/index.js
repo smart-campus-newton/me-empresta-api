@@ -35,13 +35,7 @@ app.get("/posts", function(req, res) {
   });
 });
 app.post("/posts", function(req, res) {
-  db.Post.create(req.body)
-    .then(post => {
-      res.send(`PostId.: ${post.id}`);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  db.Post.insert(req.body);
 });
 
 app.listen(port, () => console.log(`listening on port ${port}!`));
