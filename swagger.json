@@ -76,7 +76,7 @@
                 "description": "Find an object by ID",
                 "parameters": [
                     {
-                        "name": "ID",
+                        "name": "objectId",
                         "in": "path",
                         "description": "ID of object to return",
                         "required": true,
