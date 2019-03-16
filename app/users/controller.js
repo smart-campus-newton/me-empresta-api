@@ -7,7 +7,6 @@ const userServiceController = {
 }
 
 function create (req, res) {
-  debugger;
   const { body } = Object.assign({}, req)
 
   userService.create(body)
