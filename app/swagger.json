@@ -27,7 +27,7 @@
         "application/json"
     ],
     "paths": {
-        "/user": {
+        "/user/create": {
             "post": {
                 "tags": [
                     "User"
