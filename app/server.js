@@ -10,7 +10,7 @@ const userRoutes = require('./users/route')
 
 const app = express()
 
-app.set('port', config.get('APP.PORT'))
+app.set('port', process.env.PORT || config.get('APP.PORT'))
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
