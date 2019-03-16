@@ -1,0 +1,20 @@
+{
+  "DATABASE": {
+    "MYSQL": {
+      "TABLES": {
+        "MATERIALS": "MATERIALS"
+      },
+      "DEVELOPMENT": {
+        "DATABASE": "me-empresta",
+        "PORT": 41890,
+        "HOST": "mysql995.umbler.com",
+        "USER": "smart-campus",
+        "PASSWORD": "scn35085808"
+      }
+    }
+  },
+  "APP": {
+    "HOST": "",
+    "PORT": 3001
+  }
+}
