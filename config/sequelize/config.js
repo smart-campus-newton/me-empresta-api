@@ -3,7 +3,7 @@ const config = require('config')
 const databaseConfig = config.get('DATABASE.MYSQL.DEVELOPMENT')
 
 const dbConfig = {
-    [config.util.getEnv('NODE_ENV')]: {
+    default: {
         username: databaseConfig.USER,
         password: databaseConfig.PASSWORD,
         database: databaseConfig.DATABASE,
