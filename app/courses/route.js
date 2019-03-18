@@ -1,10 +1,10 @@
 const express = require('express')
-const user = require('./controller')
+const course = require('./controller')
 
 const router = express.Router()
-const controller = user()
+const controller = course()
 
 router.route('/')
-  .post(controller.create)
+  .post(controller.list)
 
 module.exports = router

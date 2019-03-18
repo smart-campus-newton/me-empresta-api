@@ -3,6 +3,13 @@ const path = require('path')
 const Sequelize = require('sequelize')
 const basename = path.basename(__filename)
 const config = require('config')
+const UsersModel = require('./users')
+const CoursesModel = require('./courses')
+const AddressModel = require('./address')
+const ShiftModel = require('./shift')
+const StatusModel = require('./status')
+const PhoneModel = require('./phone')
+
 const db = {}
 
 const { DEVELOPMENT } = config.get('DATABASE.MYSQL')
@@ -31,5 +38,18 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
+
+const Users = UsersModel(sequelize, Sequelize)
+const Courses = CoursesModel(sequelize, Sequelize)
+const Address = AddressModel(sequelize, Sequelize)
+const Shift = ShiftModel(sequelize, Sequelize)
+const Status = StatusModel(sequelize, Sequelize)
+const Phone = PhoneModel(sequelize, Sequelize)
+
+Users.belongsTo(Courses);
+Users.belongsTo(Address);
+Users.belongsTo(Shift);
+Users.belongsTo(Status);
+Users.belongsTo(Phone);
 
 module.exports = db

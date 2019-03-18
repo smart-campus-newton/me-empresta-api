@@ -27,7 +27,7 @@
         "application/json"
     ],
     "paths": {
-        "/user/create": {
+        "/user": {
             "post": {
                 "tags": [
                     "User"
@@ -53,15 +53,32 @@
                     }
                 }
             }
+        },
+        "/courses": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get all courses",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Course"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
         "User": {
             "required": [
                 "name",
-                "email",
                 "password",
-                "status"
+                "ra",
+                "phone_id",
+                "status_id"
             ],
             "properties": {
                 "name": {
@@ -73,8 +90,33 @@
                 "password": {
                     "type": "string"
                 },
-                "status": {
+                "course_id": {
                     "type": "integer"
+                },
+                "shift_id": {
+                    "type": "integer"
+                },
+                "ra": {
+                    "type": "string"
+                },
+                "phone_id": {
+                    "type": "integer"
+                },
+                "address_id": {
+                    "type": "integer"
+                },
+                "status_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Course": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
                 }
             }
         }
