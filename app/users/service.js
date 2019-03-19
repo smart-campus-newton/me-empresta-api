@@ -17,7 +17,7 @@ function create (payload) {
   })
 }
 
-function login(payload) {
+function login(payload, jwt, jwtSecret) {
   const pLoad = Object.assign({}, payload)
   const { email, password } = pLoad
 
@@ -29,7 +29,8 @@ function login(payload) {
               password
             }
           }).then((item) => {
-              return resolve(item)
+              const token = jwt.sign(item[0].dataValues, jwtSecret)
+              return resolve(token)
           }).catch((err) => {
               return reject(err)
           })
