@@ -27,6 +27,33 @@
         "application/json"
     ],
     "paths": {
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Create new user",
+                "summary": "Create new user",
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New account created"
+                    }
+                }
+            }
+        },
         "/user": {
             "post": {
                 "tags": [
@@ -72,6 +99,20 @@
         }
     },
     "definitions": {
+        "Login": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "User": {
             "required": [
                 "name",
