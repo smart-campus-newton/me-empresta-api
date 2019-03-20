@@ -8,7 +8,6 @@ const router = express.Router()
 
 router.post('/login', user.login({ jwt, jwtSecret }))
 
-router.use(auth.checkJWT({ jwt, jwtSecret }))
 router.route('/')
   .post(user.create)
 

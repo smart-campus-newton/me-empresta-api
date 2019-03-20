@@ -32,13 +32,13 @@
                 "tags": [
                     "User"
                 ],
-                "description": "Create new user",
-                "summary": "Create new user",
+                "description": "User Login",
+                "summary": "User Login",
                 "parameters": [
                     {
                         "name": "User",
                         "in": "body",
-                        "description": "User that we want to create",
+                        "description": "User that we want to login",
                         "schema": {
                             "$ref": "#/definitions/Login"
                         }
@@ -49,7 +49,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "New account created"
+                        "description": "User logged"
                     }
                 }
             }
@@ -93,6 +93,195 @@
                         "schema": {
                             "$ref": "#/definitions/Course"
                         }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Courses"
+                ],
+                "description": "Create new course",
+                "summary": "Create new course",
+                "parameters": [
+                    {
+                        "name": "Courses",
+                        "in": "body",
+                        "description": "Course that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Course"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New course created"
+                    }
+                }
+            }
+        },
+        "/shift": {
+            "get": {
+                "tags": [
+                    "Shift"
+                ],
+                "summary": "Get all shifts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Shift"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Shift"
+                ],
+                "description": "Create new shift",
+                "summary": "Create new shift",
+                "parameters": [
+                    {
+                        "name": "Shift",
+                        "in": "body",
+                        "description": "Shift that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Shift"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New shift created"
+                    }
+                }
+            }
+        },
+        "/phone": {
+            "get": {
+                "tags": [
+                    "Phone"
+                ],
+                "summary": "Get all phones",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Phone"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Phone"
+                ],
+                "description": "Create new phone",
+                "summary": "Create new phone",
+                "parameters": [
+                    {
+                        "name": "Phone",
+                        "in": "body",
+                        "description": "Phone that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Phone"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New phone created"
+                    }
+                }
+            }
+        },
+        "/status": {
+            "get": {
+                "tags": [
+                    "User Status"
+                ],
+                "summary": "Get all user status",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Status"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User Status"
+                ],
+                "description": "Create new status",
+                "summary": "Create new status",
+                "parameters": [
+                    {
+                        "name": "Status",
+                        "in": "body",
+                        "description": "Status that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Status"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New status created"
+                    }
+                }
+            }
+        },
+        "/address": {
+            "get": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Get all address",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Address"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Address"
+                ],
+                "description": "Create new address",
+                "summary": "Create new address",
+                "parameters": [
+                    {
+                        "name": "Address",
+                        "in": "body",
+                        "description": "Address that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Address"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New address created"
                     }
                 }
             }
@@ -157,6 +346,64 @@
             ],
             "properties": {
                 "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Shift": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Phone": {
+            "required": [
+                "ddd",
+                "number"
+            ],
+            "properties": {
+                "ddd": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                }
+            }
+        },
+        "Status": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Address": {
+            "required": [
+                "street",
+                "neighbourhood",
+                "city"
+            ],
+            "properties": {
+                "street": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "integer"
+                },
+                "neighbourhood": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "complement": {
                     "type": "string"
                 }
             }

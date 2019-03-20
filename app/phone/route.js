@@ -1,8 +1,8 @@
 const express = require('express')
-const course = require('./controller')
+const phone = require('./controller')
 
 const router = express.Router()
-const controller = course()
+const controller = phone()
 
 router.route('/')
   .get(controller.list)

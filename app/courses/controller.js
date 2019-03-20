@@ -2,19 +2,31 @@ const COURSE = require('./service')
 
 const courseService = COURSE()
 
-const couseServiceController = {
-  list
+const courseServiceController = {
+  list,
+  create
 }
 
-function list (req, res) {
-  courseService.findAll()
+function create (req, res) {
+  const { body } = Object.assign({}, req)
+  
+  courseService.create(body)
     .then(result =>
         res.status(201).send(result)
     ).catch((err) => {
-      res.status(400).send({ service: 'user', msg: err.message })
+      res.status(400).send({ service: 'courses', msg: err.message })
+    })
+}
+
+function list (req, res) {
+  courseService.list()
+    .then(result =>
+        res.status(201).send(result)
+    ).catch((err) => {
+      res.status(400).send({ service: 'courses', msg: err.message })
     })
 }
 
 module.exports = function factory () {
-  return couseServiceController
+  return courseServiceController
 }
