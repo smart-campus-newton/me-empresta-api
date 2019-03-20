@@ -15,6 +15,7 @@
   },
   "APP": {
     "HOST": "",
-    "PORT": 3001
+    "PORT": 3001,
+    "SECRET": "MeEmprestaRocks!"
   }
 }
