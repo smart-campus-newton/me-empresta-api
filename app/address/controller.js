@@ -1,13 +1,6 @@
-const ADDRESS = require('./service')
+const addressService = require('./service')
 
-const addressService = ADDRESS()
-
-const addressServiceController = {
-    list,
-    create
-}
-
-function create(req, res) {
+const create = (req, res) => {
     const { body } = Object.assign({}, req)
 
     addressService.create(body)
@@ -18,7 +11,7 @@ function create(req, res) {
         })
 }
 
-function list(req, res) {
+const list = (req, res) => {
     addressService.list()
         .then(result =>
             res.status(201).send(result)
@@ -27,6 +20,7 @@ function list(req, res) {
         })
 }
 
-module.exports = function factory() {
-    return addressServiceController
+module.exports = {
+    create,
+    list
 }

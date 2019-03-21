@@ -1,13 +1,6 @@
-const COURSE = require('./service')
+const courseService = require('./service')
 
-const courseService = COURSE()
-
-const courseServiceController = {
-  list,
-  create
-}
-
-function create (req, res) {
+const create = (req, res) => {
   const { body } = Object.assign({}, req)
   
   courseService.create(body)
@@ -18,7 +11,7 @@ function create (req, res) {
     })
 }
 
-function list (req, res) {
+const list = (req, res) => {
   courseService.list()
     .then(result =>
         res.status(201).send(result)
@@ -27,6 +20,7 @@ function list (req, res) {
     })
 }
 
-module.exports = function factory () {
-  return courseServiceController
+module.exports = {
+  create,
+  list
 }

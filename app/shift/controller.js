@@ -1,13 +1,6 @@
-const SHIFT = require('./service')
+const shiftService = require('./service')
 
-const shiftService = SHIFT()
-
-const shiftServiceController = {
-    list,
-    create
-}
-
-function create(req, res) {
+const create = (req, res) => {
     const { body } = Object.assign({}, req)
 
     shiftService.create(body)
@@ -18,7 +11,7 @@ function create(req, res) {
         })
 }
 
-function list(req, res) {
+const list = (req, res) => {
     shiftService.list()
         .then(result =>
             res.status(201).send(result)
@@ -27,6 +20,7 @@ function list(req, res) {
         })
 }
 
-module.exports = function factory() {
-    return shiftServiceController
+module.exports = {
+    create,
+    list
 }

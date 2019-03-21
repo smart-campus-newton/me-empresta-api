@@ -1,8 +1,6 @@
 const express = require('express')
-const phone = require('./controller')
-
+const controller = require('./controller')
 const router = express.Router()
-const controller = phone()
 
 router.route('/')
   .get(controller.list)

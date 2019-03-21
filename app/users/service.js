@@ -1,11 +1,6 @@
 const { Users, Address, Phone } = require('../models')
 
-const userService = {
-  create,
-  login
-}
-
-function create (payload) {
+const create = (payload) => {
   const pLoad = Object.assign({}, payload)
   const { address, phone } = pLoad
 
@@ -32,7 +27,7 @@ function create (payload) {
   })
 }
 
-function login(payload, jwt, jwtSecret) {
+const login = (payload, jwt, jwtSecret) => {
   const pLoad = Object.assign({}, payload)
   const { email, password } = pLoad
 
@@ -56,6 +51,7 @@ function login(payload, jwt, jwtSecret) {
   })
 }
 
-module.exports = function factory () {
-  return userService
+module.exports = {
+  login,
+  create
 }

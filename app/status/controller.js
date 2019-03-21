@@ -1,13 +1,6 @@
-const STATUS = require('./service')
+const statusService = require('./service')
 
-const statusService = STATUS()
-
-const statusServiceController = {
-    list,
-    create
-}
-
-function create(req, res) {
+const create = (req, res) => {
     const { body } = Object.assign({}, req)
 
     statusService.create(body)
@@ -18,7 +11,7 @@ function create(req, res) {
         })
 }
 
-function list(req, res) {
+const list = (req, res) => {
     statusService.list()
         .then(result =>
             res.status(201).send(result)
@@ -27,6 +20,7 @@ function list(req, res) {
         })
 }
 
-module.exports = function factory() {
-    return statusServiceController
+module.exports = {
+    create,
+    list
 }

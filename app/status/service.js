@@ -1,11 +1,6 @@
 const { UserStatus } = require('../models')
 
-const StatusService = {
-    create,
-    list
-}
-
-function create(payload) {
+const create = (payload) => {
     const pLoad = Object.assign({}, payload)
 
     return new Promise((resolve, reject) => {
@@ -22,7 +17,7 @@ function create(payload) {
     })
 }
 
-function list() {
+const list = () => {
     return new Promise((resolve, reject) => {
         try {
             UserStatus.findAll().then((item) => {
@@ -37,6 +32,7 @@ function list() {
     })
 }
 
-module.exports = function factory() {
-    return StatusService
+module.exports = {
+    create,
+    list
 }

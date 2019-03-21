@@ -1,13 +1,6 @@
-const PHONE = require('./service')
+const phoneService = require('./service')
 
-const phoneService = PHONE()
-
-const phoneServiceController = {
-    list,
-    create
-}
-
-function create(req, res) {
+const create = (req, res) => {
     const { body } = Object.assign({}, req)
 
     phoneService.create(body)
@@ -18,7 +11,7 @@ function create(req, res) {
         })
 }
 
-function list(req, res) {
+const list = (req, res) => {
     phoneService.list()
         .then(result =>
             res.status(201).send(result)
@@ -27,6 +20,7 @@ function list(req, res) {
         })
 }
 
-module.exports = function factory() {
-    return phoneServiceController
+module.exports = {
+    create,
+    list
 }

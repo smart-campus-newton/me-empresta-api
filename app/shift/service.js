@@ -1,11 +1,6 @@
 const { Shift } = require('../models')
 
-const ShiftService = {
-    create,
-    list
-}
-
-function create(payload) {
+const create = (payload) => {
     const pLoad = Object.assign({}, payload)
 
     return new Promise((resolve, reject) => {
@@ -22,7 +17,7 @@ function create(payload) {
     })
 }
 
-function list() {
+const list = () => {
     return new Promise((resolve, reject) => {
         try {
             Shift.findAll().then((item) => {
@@ -37,6 +32,7 @@ function list() {
     })
 }
 
-module.exports = function factory() {
-    return ShiftService
+module.exports = {
+    create,
+    list
 }

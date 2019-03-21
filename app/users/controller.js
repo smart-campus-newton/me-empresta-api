@@ -1,6 +1,4 @@
-const USER = require('./service')
-
-const userService = USER()
+const userService = require('./service')
 
 const login = ({ jwt, jwtSecret }) => (req, res) => {
   const { body } = Object.assign({}, req)

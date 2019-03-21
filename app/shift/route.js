@@ -1,8 +1,6 @@
 const express = require('express')
-const shift = require('./controller')
-
+const controller = require('./controller')
 const router = express.Router()
-const controller = shift()
 
 router.route('/')
   .get(controller.list)

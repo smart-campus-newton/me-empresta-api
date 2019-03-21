@@ -1,8 +1,6 @@
 const express = require('express')
-const status = require('./controller')
-
+const controller = require('./controller')
 const router = express.Router()
-const controller = status()
 
 router.route('/')
   .get(controller.list)
