@@ -15,15 +15,19 @@ function create (payload) {
       .then((addressItem) => {
         pLoad.address_id = addressItem.dataValues.id
 
-        Phone.create(phone).then((phoneItem) => {
-          pLoad.phone_id = phoneItem.dataValues.id
+        Phone
+          .create(phone)
+          .then((phoneItem) => {
+            pLoad.phone_id = phoneItem.dataValues.id
 
-          Users.create(pLoad).then((item) => {
-            return resolve(item)
-          }).catch((err) => {
-            return reject(err)
+            Users
+              .create(pLoad)
+              .then((item) => {
+                return resolve(item)
+              }).catch((err) => {
+                return reject(err)
+              })
           })
-        })
       })
   })
 }
