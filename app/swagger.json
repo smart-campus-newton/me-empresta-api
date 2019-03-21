@@ -307,7 +307,6 @@
                 "name",
                 "password",
                 "ra",
-                "phone_id",
                 "status_id"
             ],
             "properties": {
@@ -329,11 +328,26 @@
                 "ra": {
                     "type": "string"
                 },
-                "phone_id": {
-                    "type": "integer"
+                "phone": {
+                    "type": "object",
+                    "properties": {
+                        "ddd": { "type": "integer" },
+                        "number": { "type": "integer" }
+                    },
+                    "required": [
+                        "ddd",
+                        "number"
+                    ]
                 },
-                "address_id": {
-                    "type": "integer"
+                "address": {
+                    "type": "object",
+                    "properties": {
+                        "street": { "type": "string" },
+                        "number": { "type": "integer" },
+                        "neighbourhood": { "type": "string" },
+                        "city": { "type": "string" },
+                        "complement": { "type": "string" }
+                    }
                 },
                 "status_id": {
                     "type": "integer"

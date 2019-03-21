@@ -1,4 +1,4 @@
-const { Users } = require('../models')
+const { Users, Address, Phone } = require('../models')
 
 const userService = {
   create,
@@ -7,13 +7,24 @@ const userService = {
 
 function create (payload) {
   const pLoad = Object.assign({}, payload)
+  const { address, phone } = pLoad
 
   return new Promise((resolve, reject) => {
-    Users.create(pLoad).then((item) => {
-      return resolve(item)
-    }).catch((err) => {
-      return reject(err)
-    })
+    Address
+      .create(address)
+      .then((addressItem) => {
+        pLoad.address_id = addressItem.dataValues.id
+
+        Phone.create(phone).then((phoneItem) => {
+          pLoad.phone_id = phoneItem.dataValues.id
+
+          Users.create(pLoad).then((item) => {
+            return resolve(item)
+          }).catch((err) => {
+            return reject(err)
+          })
+        })
+      })
   })
 }
 
