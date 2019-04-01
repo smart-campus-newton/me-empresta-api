@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const swaggerUi = require('swagger-ui-express')
 const swStats = require('swagger-stats')
 const swaggerDocument = require('./swagger.json')
+const MongoAdapter = require('./adapter/mongo');
 
 const userRoutes = require('./users/route')
 const coursesRoutes = require('./courses/route')
@@ -14,6 +15,7 @@ const statusRoutes = require('./status/route')
 const addressRoutes = require('./address/route')
 
 const app = express()
+const mongoAdapter = MongoAdapter()
 
 app.set('port', process.env.PORT || config.get('APP.PORT'))
 app.use(cors())
@@ -30,9 +32,18 @@ app.use('/api/status', statusRoutes)
 app.use('/api/address', addressRoutes)
 
 const upServer = () => {
+  mongoAdapter.connect()
+  .then(() => {
     app.listen(app.get('port'), () => {
       console.log(`[me-empresta-api] => [server.js] => [upServer] => Server is running at port: ${app.get('port')}.`)
     })
+  })
+  .catch((err) => {
+    if (err) {
+      console.log(`[me-empresta-api] => [server.js] => [upServer] => General Error: ${err}`);
+    }
+    process.exit(1);
+  });
 }
 
 upServer()
