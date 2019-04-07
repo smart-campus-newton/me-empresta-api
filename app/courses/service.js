@@ -29,7 +29,7 @@ const create = (payload) => {
     })
 }
 
-const list = () => {
+const list = (query) => {
     console.log('[me-empresta-api] => [courses/service.js] => [list] => Getting courses.')
 
     return new Promise((resolve, reject) => {
@@ -56,6 +56,35 @@ const list = () => {
     })
 }
 
+const one = (query) => {
+    console.log('[me-empresta-api] => [courses/service.js] => [one] => Getting one course by query.')
+
+    return new Promise((resolve, reject) => {
+        try {
+            if (!query) {
+                throw new BusinessError('Empty query.');
+            }
+            const workedQuery = Object.assign({}, query);
+
+            if (!workedQuery.status) {
+                workedQuery.status = 'active';
+            }
+
+            return mongoAdapter.getState().collection('courses')
+                .findOne(workedQuery, (err, doc) => {
+                    if (err) {
+                        console.log(`[me-empresta-api] => [courses/service.js] => [one] => ${err.message}`)
+                        return reject(new InfrastructureError(err));
+                    }
+                    return resolve(doc);
+                });
+        } catch (err) {
+            console.log(`[me-empresta-api] => [courses/service.js] => [one] => ${ex}.`)
+            return reject(err);
+        }
+    });
+}
+
 const formatDateTime = (date) => {
     try {
         if (date) {
@@ -69,5 +98,6 @@ const formatDateTime = (date) => {
 
 module.exports = {
     create,
-    list
+    list,
+    one
 }

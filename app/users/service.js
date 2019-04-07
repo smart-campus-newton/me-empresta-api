@@ -29,7 +29,7 @@ const create = (payload) => {
   })
 }
 
-const login = (payload, jwt, jwtSecret) => {
+const login = (payload) => {
   console.log('[me-empresta-api] => [users/service.js] => [one] => Find one users.')
 
   return new Promise((resolve, reject) => {
@@ -44,14 +44,11 @@ const login = (payload, jwt, jwtSecret) => {
       }
 
       return mongoAdapter.getState().collection('users')
-        .find(workedQuery, (err, doc) => {
+        .findOne(workedQuery, (err, doc) => {
           if (err) {
             console.log(`[me-empresta-api] => [users/service.js] => [one] => ${err.message}`)
             return reject(new InfrastructureError(err))
           }
-          console.log(doc)
-          // const token = jwt.sign(item[0].dataValues, jwtSecret)
-          // return resolve(token)
           return resolve(doc)
         })
     } catch (err) {
