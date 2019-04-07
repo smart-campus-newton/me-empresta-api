@@ -9,6 +9,7 @@ const MongoAdapter = require('./adapter/mongo');
 
 const userRoutes = require('./users/route')
 const coursesRoutes = require('./courses/route')
+const materialsRoutes = require('./materials/route')
 
 const app = express()
 const mongoAdapter = MongoAdapter()
@@ -22,6 +23,7 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(swStats.getMiddleware({ swaggerSpec: swaggerDocument }))
 app.use('/api/user', userRoutes)
 app.use('/api/courses', coursesRoutes)
+app.use('/api/materials', materialsRoutes)
 
 const upServer = () => {
   mongoAdapter.connect()

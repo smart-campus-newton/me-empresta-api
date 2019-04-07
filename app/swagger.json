@@ -121,6 +121,47 @@
                     }
                 }
             }
+        },
+        "/materials": {
+            "get": {
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "Get all materials",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Material"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Materials"
+                ],
+                "description": "Create new materials",
+                "summary": "Create new materials",
+                "parameters": [
+                    {
+                        "name": "Materials",
+                        "in": "body",
+                        "description": "Material that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Material"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New material created"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -191,6 +232,16 @@
             }
         },
         "Course": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Material": {
             "required": [
                 "name"
             ],
