@@ -33,12 +33,7 @@ const edit = (req, res) => {
         .then(halResult => res.status(200).send(halResult).end())
     })
     .catch((err) => {
-      if (err instanceof BusinessError) {
-        res.status(400).send({ service: 'courses', msg: err.message }).end()
-      }
-      if (err instanceof InfrastructureError) {
-        res.status(500).send({ service: 'courses', msg: 'Server error.' }).end()
-      }
+      res.status(400).send({ service: 'courses', msg: err.message }).end()
     })
 }
 

@@ -20,7 +20,7 @@ const create = (payload) => {
                 .then(doc => resolve(doc.ops[0]))
                 .catch((err) => {
                     console.log(`[me-empresta-api] => [courses/service.js] => [create] => ${err.message}`)
-                    return reject(new InfrastructureError(err))
+                    return reject(err)
                 })
         } catch (err) {
             console.log(`[me-empresta-api] => [courses/service.js] => [create] => ${err.message}`)
@@ -45,7 +45,7 @@ const list = (query) => {
                 .toArray((err, docs) => {
                     if (err) {
                         console.log(`[me-empresta-api] => [courses/service.js] => [list] => ${err.message}`)
-                        return reject(new InfrastructureError(err))
+                        return reject(err)
                     }
                     return resolve(docs)
                 })
@@ -62,7 +62,7 @@ const one = (query) => {
     return new Promise((resolve, reject) => {
         try {
             if (!query) {
-                throw new BusinessError('Empty query.')
+                throw new Error('Empty query.')
             }
             const workedQuery = Object.assign({}, query)
 
@@ -74,7 +74,7 @@ const one = (query) => {
                 .findOne(workedQuery, (err, doc) => {
                     if (err) {
                         console.log(`[me-empresta-api] => [courses/service.js] => [one] => ${err.message}`)
-                        return reject(new InfrastructureError(err))
+                        return reject(err)
                     }
                     return resolve(doc)
                 })
@@ -97,7 +97,7 @@ const edit = (code, payload) => {
                 .findOneAndUpdate({ code }, { $set: pLoad }, { returnOriginal: false }, (err, doc) => {
                     if (err) {
                         console.log(`[me-empresta-api] => [courses/service.js] => [edit] => ${err.message}`)
-                        return reject(new InfrastructureError(err.message))
+                        return reject(err.message)
                     }
                     return resolve(doc.value)
                 })

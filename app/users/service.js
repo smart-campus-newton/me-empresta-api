@@ -20,7 +20,7 @@ const create = (payload) => {
         .then(doc => resolve(doc.ops[0]))
         .catch((err) => {
           console.log(`[me-empresta-api] => [users/service.js] => [create] => ${err.message}`)
-          return reject(new InfrastructureError(err))
+          return reject(err)
         })
     } catch (err) {
       console.log(`[me-empresta-api] => [users/service.js] => [create] => ${err.message}`)
@@ -35,7 +35,7 @@ const login = (payload) => {
   return new Promise((resolve, reject) => {
     try {
       if (!payload) {
-        throw new BusinessError('Empty query.')
+        throw new Error('Empty query.')
       }
       const workedQuery = Object.assign({}, payload)
 
@@ -47,7 +47,7 @@ const login = (payload) => {
         .findOne(workedQuery, (err, doc) => {
           if (err) {
             console.log(`[me-empresta-api] => [users/service.js] => [one] => ${err.message}`)
-            return reject(new InfrastructureError(err))
+            return reject(err)
           }
           return resolve(doc)
         })
@@ -70,7 +70,7 @@ const edit = (code, payload) => {
         .findOneAndUpdate({ code }, { $set: pLoad }, { returnOriginal: false }, (err, doc) => {
           if (err) {
             console.log(`[me-empresta-api] => [users/service.js] => [edit] => ${err.message}`)
-            return reject(new InfrastructureError(err.message))
+            return reject(err.message)
           }
           return resolve(doc.value)
         })
