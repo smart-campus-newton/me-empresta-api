@@ -20,17 +20,17 @@ function connect() {
     if (state.db) {
       return resolve()
     }
-    const client = new MongoClient(URI);
+    const client = new MongoClient(URI)
 
     client.connect(function(err) {
-      console.log("Connected correctly to server");
+      console.log("Connected correctly to server")
 
       const dbName = 'meemprestaapi'
-      const db = client.db(dbName);
+      const db = client.db(dbName)
       state.db = db
 
       return resolve()
-    });
+    })
   })
 }
 
