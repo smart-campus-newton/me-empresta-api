@@ -11,4 +11,7 @@ router.post('/login', user.login({ jwt, jwtSecret }))
 router.route('/')
   .post(user.create)
 
+router.route('/')
+  .put(user.edit)
+
 module.exports = router

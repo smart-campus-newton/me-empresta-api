@@ -79,6 +79,31 @@
                         "description": "New account created"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "description": "Edit user",
+                "summary": "Edit user",
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "User that we want to edit",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User edited"
+                    }
+                }
             }
         },
         "/courses": {
@@ -120,6 +145,31 @@
                         "description": "New course created"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "Courses"
+                ],
+                "description": "Edit course",
+                "summary": "Edit course",
+                "parameters": [
+                    {
+                        "name": "Courses",
+                        "in": "body",
+                        "description": "Course that we want to edit",
+                        "schema": {
+                            "$ref": "#/definitions/Course"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Course edited"
+                    }
+                }
             }
         },
         "/materials": {
@@ -159,6 +209,31 @@
                 "responses": {
                     "200": {
                         "description": "New material created"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Materials"
+                ],
+                "description": "Edit materials",
+                "summary": "Edit materials",
+                "parameters": [
+                    {
+                        "name": "Materials",
+                        "in": "body",
+                        "description": "Material that we want to edit",
+                        "schema": {
+                            "$ref": "#/definitions/Material"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Material edited"
                     }
                 }
             }

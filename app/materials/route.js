@@ -8,4 +8,7 @@ router.route('/')
 router.route('/')
   .post(controller.create)
 
+router.route('/')
+  .put(controller.edit)
+
 module.exports = router

@@ -10,7 +10,7 @@ const create = (payload) => {
         try {
             const materialsCollection = mongoAdapter.getState().collection('materials')
             const materials = Object.assign({}, payload)
-            materials.code = codeGenerator.generate('co')
+            materials.code = codeGenerator.generate('ma')
             materials.status = 'active'
             materials.created = formatDateTime(new Date())
 
@@ -62,27 +62,50 @@ const one = (query) => {
     return new Promise((resolve, reject) => {
         try {
             if (!query) {
-                throw new BusinessError('Empty query.');
+                throw new BusinessError('Empty query.')
             }
-            const workedQuery = Object.assign({}, query);
+            const workedQuery = Object.assign({}, query)
 
             if (!workedQuery.status) {
-                workedQuery.status = 'active';
+                workedQuery.status = 'active'
             }
 
             return mongoAdapter.getState().collection('materials')
                 .findOne(workedQuery, (err, doc) => {
                     if (err) {
                         console.log(`[me-empresta-api] => [materials/service.js] => [one] => ${err.message}`)
-                        return reject(new InfrastructureError(err));
+                        return reject(new InfrastructureError(err))
                     }
-                    return resolve(doc);
-                });
+                    return resolve(doc)
+                })
         } catch (err) {
             console.log(`[me-empresta-api] => [materials/service.js] => [one] => ${ex}.`)
-            return reject(err);
+            return reject(err)
         }
-    });
+    })
+}
+
+const edit = (code, payload) => {
+    console.log('[me-empresta-api] => [materials/service.js] => [edit] => Editing materials.')
+
+    return new Promise((resolve, reject) => {
+        try {
+            const pLoad = Object.assign({}, payload)
+            delete pLoad.code
+
+            return mongoAdapter.getState().collection('materials')
+                .findOneAndUpdate({ code }, { $set: pLoad }, { returnOriginal: false }, (err, doc) => {
+                    if (err) {
+                        console.log(`[me-empresta-api] => [materials/service.js] => [edit] => ${err.message}`)
+                        return reject(new InfrastructureError(err.message))
+                    }
+                    return resolve(doc.value)
+                })
+        } catch (err) {
+            console.log(`[me-empresta-api] => [materials/service.js] => [edit] => ${err.message}`)
+            return reject(err)
+        }
+    })
 }
 
 const formatDateTime = (date) => {
@@ -99,5 +122,6 @@ const formatDateTime = (date) => {
 module.exports = {
     create,
     list,
-    one
+    one,
+    edit
 }

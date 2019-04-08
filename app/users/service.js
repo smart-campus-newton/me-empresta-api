@@ -58,18 +58,42 @@ const login = (payload) => {
   })
 }
 
+const edit = (code, payload) => {
+  console.log('[me-empresta-api] => [users/service.js] => [edit] => Editing users.')
+
+  return new Promise((resolve, reject) => {
+    try {
+      const pLoad = Object.assign({}, payload)
+      delete pLoad.code
+
+      return mongoAdapter.getState().collection('users')
+        .findOneAndUpdate({ code }, { $set: pLoad }, { returnOriginal: false }, (err, doc) => {
+          if (err) {
+            console.log(`[me-empresta-api] => [users/service.js] => [edit] => ${err.message}`)
+            return reject(new InfrastructureError(err.message))
+          }
+          return resolve(doc.value)
+        })
+    } catch (err) {
+      console.log(`[me-empresta-api] => [users/service.js] => [edit] => ${err.message}`)
+      return reject(err)
+    }
+  })
+}
+
 const formatDateTime = (date) => {
   try {
-      if (date) {
-          return new Date(new Date(date).toISOString())
-      }
-      return null
+    if (date) {
+      return new Date(new Date(date).toISOString())
+    }
+    return null
   } catch (err) {
-      return null
+    return null
   }
 }
 
 module.exports = {
   login,
-  create
+  create,
+  edit
 }

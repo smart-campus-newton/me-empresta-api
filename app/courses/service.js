@@ -62,27 +62,50 @@ const one = (query) => {
     return new Promise((resolve, reject) => {
         try {
             if (!query) {
-                throw new BusinessError('Empty query.');
+                throw new BusinessError('Empty query.')
             }
-            const workedQuery = Object.assign({}, query);
+            const workedQuery = Object.assign({}, query)
 
             if (!workedQuery.status) {
-                workedQuery.status = 'active';
+                workedQuery.status = 'active'
             }
 
             return mongoAdapter.getState().collection('courses')
                 .findOne(workedQuery, (err, doc) => {
                     if (err) {
                         console.log(`[me-empresta-api] => [courses/service.js] => [one] => ${err.message}`)
-                        return reject(new InfrastructureError(err));
+                        return reject(new InfrastructureError(err))
                     }
-                    return resolve(doc);
-                });
+                    return resolve(doc)
+                })
         } catch (err) {
             console.log(`[me-empresta-api] => [courses/service.js] => [one] => ${ex}.`)
-            return reject(err);
+            return reject(err)
         }
-    });
+    })
+}
+
+const edit = (code, payload) => {
+    console.log('[me-empresta-api] => [courses/service.js] => [edit] => Editing courses.')
+
+    return new Promise((resolve, reject) => {
+        try {
+            const pLoad = Object.assign({}, payload)
+            delete pLoad.code
+
+            return mongoAdapter.getState().collection('courses')
+                .findOneAndUpdate({ code }, { $set: pLoad }, { returnOriginal: false }, (err, doc) => {
+                    if (err) {
+                        console.log(`[me-empresta-api] => [courses/service.js] => [edit] => ${err.message}`)
+                        return reject(new InfrastructureError(err.message))
+                    }
+                    return resolve(doc.value)
+                })
+        } catch (err) {
+            console.log(`[me-empresta-api] => [courses/service.js] => [edit] => ${err.message}`)
+            return reject(err)
+        }
+    })
 }
 
 const formatDateTime = (date) => {
@@ -99,5 +122,6 @@ const formatDateTime = (date) => {
 module.exports = {
     create,
     list,
-    one
+    one,
+    edit
 }
